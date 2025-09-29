@@ -1,0 +1,67 @@
+Day1:
+    一、git最简单流程:
+        1、git clone
+        2、git init
+        3、git add ...
+        4、git commit -m ...
+        5、git push
+    二、makefile:
+        1、CC = gcc
+           CFLAGS = -Wall -g -O0
+           两行均为变量定义;
+            gcc 就是“把你写的 C 代码变成电脑能跑的程序”的那台免费、开源、跨语言的“编译发动机”。
+            
+            ---
+
+            1. 名字
+            - GCC = GNU Compiler Collection(原名 GNU C Compiler) 
+            - 现在已支持 C、C++、Objective-C、Fortran、Ada、Go、D、Rust 等，但大家都习惯把“用 GCC 编译 C”简称为“用 gcc”。
+            
+            ---
+
+            2. 它到底干了啥？
+            把人类可读的 `.c` 文件经过 四步流水线 生成可执行文件：
+            ```
+            hello.c ──预处理→ hello.i ──编译→ hello.s ──汇编→ hello.o ──链接→ hello.exe (或 a.out)
+            ```
+            阶段	命令示例	                    作用	
+            预处理	`gcc -E hello.c -o hello.i`	   展开头文件、宏、去掉注释	
+            编译	`gcc -S hello.i -o hello.s`	   把 C 翻译成汇编	
+            汇编	`gcc -c hello.s -o hello.o`	   把汇编翻译成机器码，得到目标文件	
+            链接	`gcc hello.o -o hello`	       把多个 .o 和库文件拼成最终可执行文件	
+
+            日常一句 `gcc hello.c -o hello` 就把四步全做了。
+
+            ---
+
+            3. 为什么 Windows 也能用？
+            - MinGW 项目把 GCC 移植到了 Windows,生成原生 `.exe`。  
+            - WSL2 里跑的 GCC 其实就是 Linux 版，生成的可执行文件在 Linux 子系统里运行。
+
+            ---
+
+            4. 常用开关速记
+
+            选项	意义	
+            `-Wall`	打开所有常用警告，写代码必开	
+            `-g`	生成调试信息，否则 gdb 无法单步	
+            `-O0`	不做优化，调试时代码行不会乱跳	
+            `-O2`	正式发布时常用优化级别	
+            `-std=c11`	指定 C 语言标准版本	
+            `-m32` / `-m64`	生成 32/64 位代码(Bomb Lab 会强制 32 位)	
+
+            ---
+
+            5. 验证
+
+            ```bash
+            gcc --version
+            ```
+
+            如果出现类似
+
+            ```
+            gcc (MinGW.org GCC Build-2) 9.2.0
+            ```
+
+            就说明发动机已经装好，随时可以把 C 源代码变成可执行程序。
